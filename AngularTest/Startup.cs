@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -40,11 +39,13 @@ namespace AngularTest
                 .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = 
                 new DefaultContractResolver());
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AngularTest", Version = "v1" });
+                configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,21 +54,18 @@ namespace AngularTest
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod()
                 .AllowAnyHeader());
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AngularTest v1"));
-            }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(name: "default",
+                    "{controller=Home}/{action=Index}");
                 endpoints.MapControllers();
             });
         }

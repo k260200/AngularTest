@@ -30,7 +30,7 @@ namespace AngularTest.Controllers
                     Date = DateTime.Now.AddDays(index),
                     TemperatureC = rng.Next(-20, 55),
                     Summary = Summaries[rng.Next(Summaries.Length)]
-                });
+                }).ToArray();
             }
 
             return new JsonResult(_forecasts.ToArray());
@@ -48,7 +48,7 @@ namespace AngularTest.Controllers
                     Date = DateTime.Now.AddDays(index),
                     TemperatureC = rng.Next(-20, 55),
                     Summary = Summaries[rng.Next(Summaries.Length)]
-                });
+                }).ToArray();
             }
 
             if (!id.HasValue || id < 0 || id > _forecasts.Count())
