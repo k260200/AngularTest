@@ -17,8 +17,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
-  <Target Name="NgDebug" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug'">
+  <!--<Target Name="NgDebug" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug'">
     <Exec WorkingDirectory="$(ProjectDir)/ClientApp/angular" Command="ng build" />
-  </Target>
+  </Target>-->
 
 </Project>

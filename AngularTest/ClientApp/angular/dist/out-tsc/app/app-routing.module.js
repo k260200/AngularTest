@@ -7,7 +7,8 @@ import { HomeComponent } from './home/home.component';
 const routes = [
     { path: 'home', component: HomeComponent },
     { path: 'forecasts', component: ForecastsComponent },
-    { path: 'forecast', component: ForecastComponent }
+    { path: 'forecast', component: ForecastComponent },
+    { path: '**', component: HomeComponent }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
