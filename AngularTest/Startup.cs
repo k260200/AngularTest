@@ -33,10 +33,10 @@ namespace AngularTest
             });
 
             services.AddControllersWithViews()
-                .AddNewtonsoftJson(options => 
-                options.SerializerSettings.ReferenceLoopHandling = 
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling =
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore)
-                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = 
+                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver =
                 new DefaultContractResolver());
 
             services.AddControllers();
@@ -62,6 +62,9 @@ namespace AngularTest
                     "{controller=Home}/{action=Index}");
                 endpoints.MapControllers();
             });
+
+            // For default routing
+            app.UseStatusCodePagesWithRedirects("/Home");
         }
     }
 }
