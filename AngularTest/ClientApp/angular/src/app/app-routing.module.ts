@@ -8,7 +8,8 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'forecasts', component: ForecastsComponent },
-  { path: 'forecast', component: ForecastComponent }
+  { path: 'forecast', component: ForecastComponent },
+  { path: '**', component: HomeComponent }
 ];
 
 @NgModule({
